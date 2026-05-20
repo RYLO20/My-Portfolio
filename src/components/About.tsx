@@ -8,22 +8,19 @@ import {
   Computer, 
   Wrench, 
   Clock, 
-  Users, 
-  Database, 
+  Users,  
   FolderOpen,
   FileText,
   Video,
   Edit,
   Layout,
   Award,
-  Briefcase,
-  GraduationCap,
-  Heart,
+ 
+ 
   Globe,
-  Mail,
   MapPin,
-  Smartphone,
-  Monitor
+
+  
 } from "lucide-react";
 
 export default function About() {
