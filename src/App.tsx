@@ -1,15 +1,19 @@
+// src/App.tsx
+
 import Hero from './components/Hero';
+import About from './components/About';
 import Services from './components/Services';
 import Projects from './components/Projects';
-import Footer from './components/Footer'; // Import Footer
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="bg-[#0B132B] min-h-screen">
+    <div className="bg-[#0B132B]">
       <Hero />
+      <About />
       <Services />
       <Projects />
-      <Footer /> {/* Add Footer here */}
+      <Footer />
     </div>
   )
 }

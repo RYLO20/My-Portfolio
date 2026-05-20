@@ -1,5 +1,5 @@
 // src/components/Services.tsx
-<section id="services" className="relative overflow-hidden bg-[#0B132B] py-20 md:py-28"></section>
+<section className="relative overflow-hidden bg-[#0B132B] pb-16 md:pb-20"></section>
 import {
   BarChart3,
   Megaphone,
@@ -48,7 +48,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative overflow-hidden bg-[#0B132B] py-20 md:py-28">
+    <section id="services" className="relative overflow-hidden bg-[#0B132B] pt-12 pb-8 md:pt-16 md:pb-10">
       {/* Glow */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-0 h-[220px] w-[220px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl md:h-[320px] md:w-[320px]" />

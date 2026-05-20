@@ -342,10 +342,21 @@ export default function Hero() {
                 <div><h3 className="font-bold text-white">Phone</h3><p className="text-[12px] text-white/50">09304999228</p></div>
               </a>
 
-              <a href="mailto:ryananthonyterrado21@gmail.com" className="flex items-center gap-3 rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3 transition hover:border-cyan-500/30 hover:bg-cyan-500/10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">✉</div>
-                <div><h3 className="font-bold text-white">Email</h3><p className="max-w-[180px] break-words text-[11px] leading-5 text-white/50">ryananthonyterrado21@gmail.com</p></div>
-              </a>
+             {/* Email */}
+                <a
+                  href="mailto:ryananthonyterrado21@gmail.com"
+                  className="flex items-center gap-3 rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3 transition hover:border-cyan-500/30 hover:bg-cyan-500/10"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
+                    ✉
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white">Email</h3>
+                    <p className="max-w-[180px] break-words text-[11px] leading-5 text-white/50">
+                      ryananthonyterrado21@gmail.com
+                    </p>
+                  </div>
+                </a>
             </div>
           </div>
         </div>

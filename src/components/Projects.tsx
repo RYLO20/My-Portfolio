@@ -55,7 +55,7 @@ export default function Projects() {
   return (
     <>
       <section id="portfolio" className="relative overflow-hidden bg-[#0B132B] py-20 md:py-28"></section>
-      <section className="relative overflow-hidden bg-[#0B132B] py-20 md:py-28">
+      <section id="portfolio" className="relative overflow-hidden bg-[#0B132B] pt-8 pb-20 md:pt-10 md:py-28">
         {/* Glow */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute right-0 top-0 h-[300px] w-[300px] rounded-full bg-violet-600/10 blur-3xl md:h-[420px] md:w-[420px]" />
