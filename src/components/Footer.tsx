@@ -1,5 +1,6 @@
 // src/components/Footer.tsx
-
+// Find the footer and add id
+<footer id="contact" className="overflow-hidden bg-[#0B132B] px-5 pb-10 font-['Poppins',sans-serif] text-[#F8FAFC] sm:px-6 md:px-12 md:pb-12"></footer>
 import React, { useState } from "react";
 
 const Footer: React.FC = () => {
@@ -7,6 +8,7 @@ const Footer: React.FC = () => {
 
   return (
     <>
+    <footer className="overflow-hidden bg-[#0B132B] px-5 pb-10 font-['Poppins',sans-serif] text-[#F8FAFC] sm:px-6 md:px-12 md:pb-12"></footer>
       <footer className="overflow-hidden bg-[#0B132B] px-5 pb-10 font-['Poppins',sans-serif] text-[#F8FAFC] sm:px-6 md:px-12 md:pb-12">
         <div className="mx-auto w-full max-w-7xl">
           {/* CTA Banner */}

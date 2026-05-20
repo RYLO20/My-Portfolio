@@ -1,5 +1,5 @@
 // src/components/Projects.tsx
-
+<section id="portfolio" className="relative overflow-hidden bg-[#0B132B] py-20 md:py-28"></section>
 import { useState } from "react";
 
 const projects = [
@@ -51,9 +51,10 @@ export default function Projects() {
 
   // REST PROJECTS
   const allProjects = projects.slice(3);
-
+  
   return (
     <>
+      <section id="portfolio" className="relative overflow-hidden bg-[#0B132B] py-20 md:py-28"></section>
       <section className="relative overflow-hidden bg-[#0B132B] py-20 md:py-28">
         {/* Glow */}
         <div className="absolute inset-0 -z-10 overflow-hidden">

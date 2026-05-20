@@ -6,8 +6,39 @@ import heroImage from "../assets/hero.png";
 export default function Hero() {
   const [openModal, setOpenModal] = useState(false);
   const [floatingMenuOpen, setFloatingMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("HOME");
   
   const navItems = ["HOME", "ABOUT", "SERVICES", "PORTFOLIO", "TESTIMONIALS", "CONTACT"];
+
+  // Map nav items to section IDs
+  const sectionMap: { [key: string]: string } = {
+    "HOME": "home",
+    "ABOUT": "about",
+    "SERVICES": "services",
+    "PORTFOLIO": "portfolio",
+    "TESTIMONIALS": "testimonials",
+    "CONTACT": "contact"
+  };
+
+  // Scroll to section function
+  const scrollToSection = (section: string) => {
+    setActiveSection(section);
+    setFloatingMenuOpen(false);
+    
+    const sectionId = sectionMap[section];
+    const element = document.getElementById(sectionId);
+    
+    if (element) {
+      const offset = 80; // Height of navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
     <>
@@ -41,13 +72,17 @@ export default function Hero() {
             {/* Desktop Navigation */}
             <nav className="hidden items-center gap-8 lg:flex">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item}
-                  href="#"
-                  className="text-[11px] font-bold tracking-[0.12em] text-white/75 transition hover:text-white"
+                  onClick={() => scrollToSection(item)}
+                  className={`text-[11px] font-bold tracking-[0.12em] transition hover:text-white cursor-pointer ${
+                    activeSection === item 
+                      ? "text-cyan-400 border-b-2 border-cyan-400 pb-1" 
+                      : "text-white/75"
+                  }`}
                 >
                   {item}
-                </a>
+                </button>
               ))}
             </nav>
 
@@ -58,34 +93,45 @@ export default function Hero() {
             >
               LET'S TALK →
             </button>
-
+            
             {/* Floating Navigation Button - Mobile Only */}
-            <div className="relative lg:hidden">
+            <div className="fixed bottom-6 right-6 z-[100] md:hidden lg:hidden">
+              {/* Backdrop Blur Overlay - appears when menu is open */}
+              {floatingMenuOpen && (
+                <div 
+                  className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-all duration-300"
+                  onClick={() => setFloatingMenuOpen(false)}
+                />
+              )}
+
               {/* Floating Action Button */}
               <button
                 onClick={() => setFloatingMenuOpen(!floatingMenuOpen)}
-                className="relative z-50 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 shadow-lg transition-all duration-300 hover:scale-110"
+                className="relative z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
               >
                 <div className={`absolute transition-transform duration-300 ${floatingMenuOpen ? 'rotate-45' : 'rotate-0'}`}>
-                  <span className="text-xl font-bold text-white">+</span>
+                  <span className="text-2xl font-bold text-white">+</span>
                 </div>
               </button>
 
               {/* Menu Items - Popup when clicked */}
-              <div className={`absolute bottom-16 right-0 z-40 transition-all duration-300 ${floatingMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+              <div className={`absolute bottom-20 right-0 z-50 transition-all duration-300 ${floatingMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
                 <div className="flex flex-col gap-3">
                   {navItems.map((item, index) => (
-                    <a
+                    <button
                       key={item}
-                      href="#"
-                      onClick={() => setFloatingMenuOpen(false)}
-                      className="flex items-center justify-center rounded-full bg-[#0B132B] border border-white/10 px-4 py-2 text-[11px] font-bold tracking-[0.12em] text-white/80 shadow-lg backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/5"
+                      onClick={() => scrollToSection(item)}
+                      className={`flex items-center justify-center rounded-full border px-5 py-3 text-[12px] font-bold tracking-[0.12em] shadow-lg backdrop-blur-md transition-all hover:scale-105 whitespace-nowrap cursor-pointer ${
+                        activeSection === item
+                          ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white border-transparent"
+                          : "bg-[#0B132B] border-white/10 text-white/90 hover:bg-white/10"
+                      }`}
                       style={{
                         animation: floatingMenuOpen ? `slideIn 0.2s ease ${index * 0.05}s both` : 'none'
                       }}
                     >
                       {item}
-                    </a>
+                    </button>
                   ))}
                   
                   {/* Contact Button */}
@@ -94,7 +140,7 @@ export default function Hero() {
                       setFloatingMenuOpen(false);
                       setOpenModal(true);
                     }}
-                    className="flex items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 px-4 py-2 text-[11px] font-bold tracking-[0.12em] text-white shadow-lg transition-all hover:scale-105"
+                    className="flex items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 px-5 py-3 text-[12px] font-bold tracking-[0.12em] text-white shadow-lg transition-all hover:scale-105 whitespace-nowrap cursor-pointer"
                     style={{
                       animation: floatingMenuOpen ? `slideIn 0.2s ease ${navItems.length * 0.05}s both` : 'none'
                     }}
@@ -107,80 +153,86 @@ export default function Hero() {
           </div>
         </header>
 
-        {/* DESKTOP LAYOUT (lg and above) */}
-        <div className="relative mx-auto hidden max-w-7xl items-center gap-8 px-5 py-16 lg:grid lg:grid-cols-2 lg:px-10">
-          {/* LEFT */}
-          <div className="max-w-[560px] animate-[fadeUp_1s_ease]">
-            <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">
-              DIGITAL MARKETING DESIGNER
-            </p>
+        {/* HOME Section */}
+        <div id="home">
+          {/* DESKTOP LAYOUT (lg and above) */}
+          <div className="relative mx-auto hidden max-w-7xl items-center gap-8 px-5 py-16 lg:grid lg:grid-cols-2 lg:px-10">
+            {/* LEFT */}
+            <div className="max-w-[560px] animate-[fadeUp_1s_ease]">
+              <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">
+                DIGITAL MARKETING DESIGNER
+              </p>
 
-            <h1 className="text-[64px] font-black leading-[1.05] tracking-[-0.04em] text-white">
-              I Design Digital
-              <br />
-              Experiences That
-              <br />
-              <span className="bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
-                Drive Results.
-              </span>
-            </h1>
+              <h1 className="text-[64px] font-black leading-[1.05] tracking-[-0.04em] text-white">
+                I Design Digital
+                <br />
+                Experiences That
+                <br />
+                <span className="bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
+                  Drive Results.
+                </span>
+              </h1>
 
-            <div className="mt-6 h-[4px] w-24 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500" />
+              <div className="mt-6 h-[4px] w-24 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500" />
 
-            <p className="mt-7 max-w-[460px] text-[15px] leading-8 text-white/55">
-              I create high-converting visual content and strategies
-              that help brands grow, engage, and stand out in the
-              digital world.
-            </p>
+              <p className="mt-7 max-w-[460px] text-[15px] leading-8 text-white/55">
+                I create high-converting visual content and strategies
+                that help brands grow, engage, and stand out in the
+                digital world.
+              </p>
 
-            <div className="mt-10 flex gap-4">
-              <button className="rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white transition hover:scale-105">
-                VIEW MY WORK
-              </button>
+              <div className="mt-10 flex gap-4">
+                <button 
+                  onClick={() => scrollToSection("PORTFOLIO")}
+                  className="rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white transition hover:scale-105 cursor-pointer"
+                >
+                  VIEW MY WORK
+                </button>
 
-              <button
-                onClick={() => setOpenModal(true)}
-                className="rounded-lg border border-white/6 bg-white/[0.02] px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white/75 backdrop-blur transition hover:border-cyan-400/20 hover:bg-cyan-400/5 hover:text-white"
-              >
-                LET'S WORK TOGETHER
-              </button>
-            </div>
-          </div>
-
-          {/* RIGHT - Double Circle Background */}
-          <div className="relative flex h-[650px] items-center justify-center">
-            {/* Outer Blurry Circle */}
-            <div className="absolute right-[0%] top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 blur-2xl" />
-            
-            {/* Inner Sharp Gradient Circle */}
-            <div className="absolute right-[5%] top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-600 via-cyan-500 to-violet-600 opacity-60" />
-
-            {/* Image */}
-            <div className="relative z-10">
-              <img
-                src={heroImage}
-                alt="Hero"
-                className="relative z-10 h-[550px] object-contain [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
-              />
+                <button
+                  onClick={() => setOpenModal(true)}
+                  className="rounded-lg border border-white/6 bg-white/[0.02] px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white/75 backdrop-blur transition hover:border-cyan-400/20 hover:bg-cyan-400/5 hover:text-white cursor-pointer"
+                >
+                  LET'S WORK TOGETHER
+                </button>
+              </div>
             </div>
 
-            {/* Cards */}
-            <div className="absolute left-6 top-16 z-20 w-[150px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
-              <p className="text-[10px] font-semibold tracking-wide text-cyan-400">VIDEO EDITING</p>
-              <h3 className="mt-2 text-lg font-bold leading-tight text-white">Cinematic<br />Reels</h3>
-              <p className="mt-2 text-[11px] leading-4 text-white/50">Short Form Content<br />Motion Graphics</p>
-            </div>
+            {/* RIGHT - Double Circle Background */}
+            <div className="relative flex h-[650px] items-center justify-center">
+              {/* Outer Blurry Circle */}
+              <div className="absolute right-[0%] top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 blur-2xl" />
+              
+              {/* Inner Sharp Gradient Circle */}
+              <div className="absolute right-[5%] top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-600 via-cyan-500 to-violet-600 opacity-60" />
 
-            <div className="absolute bottom-24 left-10 z-20 w-[160px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
-              <p className="text-[10px] font-semibold tracking-wide text-violet-400">DIGITAL<br />MARKETING</p>
-              <h3 className="mt-2 text-lg font-bold leading-tight text-white">Meta Ads<br />Strategy</h3>
-              <p className="mt-2 text-[11px] leading-4 text-white/50">Content Marketing<br />Brand Growth</p>
-            </div>
+              {/* Image */}
+              <div className="relative z-10">
+                <img
+                  src={heroImage}
+                  alt="Hero"
+                  className="relative z-10 h-[550px] object-contain [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
+                />
+              </div>
 
-            <div className="absolute right-10 top-[52%] z-20 w-[155px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
-              <p className="text-[10px] font-semibold tracking-wide text-green-400">GRAPHIC<br />DESIGN</p>
-              <h3 className="mt-2 text-lg font-bold leading-tight text-white">Creative<br />Branding</h3>
-              <p className="mt-2 text-[11px] leading-4 text-white/50">Media Design<br />Social Content</p>
+              {/* Cards */}
+              <div className="absolute left-6 top-16 z-20 w-[150px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
+                <p className="text-[10px] font-semibold tracking-wide text-cyan-400">VIDEO EDITING</p>
+                <h3 className="mt-2 text-lg font-bold leading-tight text-white">Cinematic<br />Reels</h3>
+                <p className="mt-2 text-[11px] leading-4 text-white/50">Short Form Content<br />Motion Graphics</p>
+              </div>
+
+              <div className="absolute bottom-24 left-10 z-20 w-[160px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
+                <p className="text-[10px] font-semibold tracking-wide text-violet-400">DIGITAL<br />MARKETING</p>
+                <h3 className="mt-2 text-lg font-bold leading-tight text-white">Meta Ads<br />Strategy</h3>
+                <p className="mt-2 text-[11px] leading-4 text-white/50">Content Marketing<br />Brand Growth</p>
+              </div>
+
+              <div className="absolute right-10 top-[52%] z-20 w-[155px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
+                <p className="text-[10px] font-semibold tracking-wide text-green-400">GRAPHIC<br />DESIGN</p>
+                <h3 className="mt-2 text-lg font-bold leading-tight text-white">Creative<br />Branding</h3>
+                <p className="mt-2 text-[11px] leading-4 text-white/50">Media Design<br />Social Content</p>
+              </div>
             </div>
           </div>
         </div>
@@ -212,13 +264,16 @@ export default function Hero() {
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <button className="rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white transition hover:scale-105">
+              <button 
+                onClick={() => scrollToSection("PORTFOLIO")}
+                className="rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white transition hover:scale-105 cursor-pointer"
+              >
                 VIEW MY WORK
               </button>
 
               <button
                 onClick={() => setOpenModal(true)}
-                className="rounded-lg border border-white/6 bg-white/[0.02] px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white/75 backdrop-blur transition hover:border-cyan-400/20 hover:bg-cyan-400/5 hover:text-white"
+                className="rounded-lg border border-white/6 bg-white/[0.02] px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white/75 backdrop-blur transition hover:border-cyan-400/20 hover:bg-cyan-400/5 hover:text-white cursor-pointer"
               >
                 LET'S WORK TOGETHER
               </button>
