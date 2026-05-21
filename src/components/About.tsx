@@ -136,8 +136,6 @@ export default function About() {
             Based in Malabon City, Philippines, I am an Information Technology student at Datamex College of Saint Adeline with a strong passion for digital design, content creation, and technology.
           </p>
           <div className="mt-3 flex items-center gap-2 text-sm text-white/70 md:text-base">
-            <MapPin className="h-4 w-4 text-cyan-400" />
-            <span>258 Dulong Hernandez St. Catmon, Malabon</span>
           </div>
         </div>
 
@@ -231,20 +229,15 @@ export default function About() {
               </div>
             </div>
 
-            {/* Certifications */}
+            {/* Certifications - Simplified Layout */}
             <div className="rounded-xl border border-white/10 bg-gradient-to-r from-violet-600/10 to-cyan-500/10 p-6 backdrop-blur-sm">
               <h3 className="mb-4 text-xl font-bold text-white">Certifications</h3>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {certifications.map((cert, index) => (
-                  <div key={index} className="flex items-center gap-4 rounded-lg bg-white/5 p-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-400/20">
-                      <Award className="h-6 w-6 text-cyan-400" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-base font-bold text-white md:text-lg">{cert.name}</h4>
-                      <p className="text-sm text-violet-400 md:text-base">{cert.issuer}</p>
-                      <p className="text-xs text-white/50 md:text-sm">{cert.period}</p>
-                    </div>
+                  <div key={index} className="border-b border-white/10 last:border-0 pb-3 last:pb-0">
+                    <h4 className="text-base font-bold text-white md:text-lg">{cert.name}</h4>
+                    <p className="text-sm text-violet-400 md:text-base">{cert.issuer}</p>
+                    <p className="text-xs text-white/50 md:text-sm">{cert.period}</p>
                   </div>
                 ))}
               </div>
