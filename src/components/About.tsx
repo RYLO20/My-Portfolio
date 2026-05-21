@@ -13,9 +13,8 @@ import {
   Video,
   Edit,
   Layout,
-  Award,
   Globe,
-  MapPin
+
 } from "lucide-react";
 
 export default function About() {
