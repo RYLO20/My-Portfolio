@@ -1,12 +1,14 @@
 // src/components/Hero.tsx
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import heroImage from "../assets/hero.png";
 
 export default function Hero() {
   const [openModal, setOpenModal] = useState(false);
   const [floatingMenuOpen, setFloatingMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("HOME");
+  const [isNavbarSticky, setIsNavbarSticky] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
   
   const navItems = ["HOME", "ABOUT", "SERVICES", "PORTFOLIO", "TESTIMONIALS", "CONTACT"];
 
@@ -40,9 +42,26 @@ export default function Hero() {
     }
   };
 
+  // Handle scroll to make navbar sticky
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const heroBottom = heroRef.current.offsetTop + heroRef.current.offsetHeight;
+        if (window.scrollY > heroBottom - 100) {
+          setIsNavbarSticky(true);
+        } else {
+          setIsNavbarSticky(false);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      <section className="relative overflow-hidden bg-[#0B132B]">
+      <section ref={heroRef} className="relative overflow-hidden bg-[#0B132B]">
         {/* Background - Clean without excessive glow */}
         <div className="absolute inset-0">
           {/* Simple Grid Pattern */}
@@ -59,8 +78,14 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Navbar */}
-        <header className="relative z-30 border-b border-white/[0.03]">
+        {/* Navbar - Changes based on scroll */}
+        <header 
+          className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
+            isNavbarSticky 
+              ? "bg-[#0B132B]/80 backdrop-blur-lg border-b border-white/10 shadow-lg" 
+              : "bg-transparent border-b border-white/[0.03]"
+          }`}
+        >
           <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-10">
             {/* Logo */}
             <h1 className="text-xl font-black tracking-tight sm:text-2xl md:text-3xl">
@@ -93,77 +118,104 @@ export default function Hero() {
             >
               LET'S TALK →
             </button>
-            
-            {/* Floating Navigation Button - Mobile Only */}
-            <div className="fixed bottom-6 right-6 z-[100] md:hidden lg:hidden">
-              {/* Backdrop Blur Overlay - appears when menu is open */}
-              {floatingMenuOpen && (
-                <div 
-                  className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-all duration-300"
-                  onClick={() => setFloatingMenuOpen(false)}
-                />
-              )}
+          </div>
+        </header>
 
-              {/* Floating Action Button */}
-              <button
-                onClick={() => setFloatingMenuOpen(!floatingMenuOpen)}
-                className="relative z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
-              >
-                <div className={`absolute transition-transform duration-300 ${floatingMenuOpen ? 'rotate-45' : 'rotate-0'}`}>
-                  <span className="text-2xl font-bold text-white">+</span>
-                </div>
-              </button>
+        {/* Add padding-top to prevent content from hiding under fixed navbar */}
+        <div className="pt-[72px]">
+          {/* HOME Section */}
+          <div id="home">
+            {/* DESKTOP LAYOUT (lg and above) */}
+            <div className="relative mx-auto hidden max-w-7xl items-center gap-8 px-5 py-16 lg:grid lg:grid-cols-2 lg:px-10">
+              {/* LEFT */}
+              <div className="max-w-[560px] animate-[fadeUp_1s_ease]">
+                <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">
+                  DIGITAL MARKETING DESIGNER
+                </p>
 
-              {/* Menu Items - Popup when clicked */}
-              <div className={`absolute bottom-20 right-0 z-50 transition-all duration-300 ${floatingMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-                <div className="flex flex-col gap-3">
-                  {navItems.map((item, index) => (
-                    <button
-                      key={item}
-                      onClick={() => scrollToSection(item)}
-                      className={`flex items-center justify-center rounded-full border px-5 py-3 text-[12px] font-bold tracking-[0.12em] shadow-lg backdrop-blur-md transition-all hover:scale-105 whitespace-nowrap cursor-pointer ${
-                        activeSection === item
-                          ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white border-transparent"
-                          : "bg-[#0B132B] border-white/10 text-white/90 hover:bg-white/10"
-                      }`}
-                      style={{
-                        animation: floatingMenuOpen ? `slideIn 0.2s ease ${index * 0.05}s both` : 'none'
-                      }}
-                    >
-                      {item}
-                    </button>
-                  ))}
-                  
-                  {/* Contact Button */}
-                  <button
-                    onClick={() => {
-                      setFloatingMenuOpen(false);
-                      setOpenModal(true);
-                    }}
-                    className="flex items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 px-5 py-3 text-[12px] font-bold tracking-[0.12em] text-white shadow-lg transition-all hover:scale-105 whitespace-nowrap cursor-pointer"
-                    style={{
-                      animation: floatingMenuOpen ? `slideIn 0.2s ease ${navItems.length * 0.05}s both` : 'none'
-                    }}
+                <h1 className="text-[64px] font-black leading-[1.05] tracking-[-0.04em] text-white">
+                  I Design Digital
+                  <br />
+                  Experiences That
+                  <br />
+                  <span className="bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
+                    Drive Results.
+                  </span>
+                </h1>
+
+                <div className="mt-6 h-[4px] w-24 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500" />
+
+                <p className="mt-7 max-w-[460px] text-[15px] leading-8 text-white/55">
+                  I create high-converting visual content and strategies
+                  that help brands grow, engage, and stand out in the
+                  digital world.
+                </p>
+
+                <div className="mt-10 flex gap-4">
+                  <button 
+                    onClick={() => scrollToSection("PORTFOLIO")}
+                    className="rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white transition hover:scale-105 cursor-pointer"
                   >
-                    LET'S TALK →
+                    VIEW MY WORK
                   </button>
+
+                  <button
+                    onClick={() => setOpenModal(true)}
+                    className="rounded-lg border border-white/6 bg-white/[0.02] px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white/75 backdrop-blur transition hover:border-cyan-400/20 hover:bg-cyan-400/5 hover:text-white cursor-pointer"
+                  >
+                    LET'S WORK TOGETHER
+                  </button>
+                </div>
+              </div>
+
+              {/* RIGHT - Double Circle Background */}
+              <div className="relative flex h-[650px] items-center justify-center">
+                {/* Outer Blurry Circle */}
+                <div className="absolute right-[0%] top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 blur-2xl" />
+                
+                {/* Inner Sharp Gradient Circle */}
+                <div className="absolute right-[5%] top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-600 via-cyan-500 to-violet-600 opacity-60" />
+
+                {/* Image */}
+                <div className="relative z-10">
+                  <img
+                    src={heroImage}
+                    alt="Hero"
+                    className="relative z-10 h-[550px] object-contain [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
+                  />
+                </div>
+
+                {/* Cards */}
+                <div className="absolute left-6 top-16 z-20 w-[150px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
+                  <p className="text-[10px] font-semibold tracking-wide text-cyan-400">VIDEO EDITING</p>
+                  <h3 className="mt-2 text-lg font-bold leading-tight text-white">Cinematic<br />Reels</h3>
+                  <p className="mt-2 text-[11px] leading-4 text-white/50">Short Form Content<br />Motion Graphics</p>
+                </div>
+
+                <div className="absolute bottom-24 left-10 z-20 w-[160px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
+                  <p className="text-[10px] font-semibold tracking-wide text-violet-400">DIGITAL<br />MARKETING</p>
+                  <h3 className="mt-2 text-lg font-bold leading-tight text-white">Meta Ads<br />Strategy</h3>
+                  <p className="mt-2 text-[11px] leading-4 text-white/50">Content Marketing<br />Brand Growth</p>
+                </div>
+
+                <div className="absolute right-10 top-[52%] z-20 w-[155px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
+                  <p className="text-[10px] font-semibold tracking-wide text-green-400">GRAPHIC<br />DESIGN</p>
+                  <h3 className="mt-2 text-lg font-bold leading-tight text-white">Creative<br />Branding</h3>
+                  <p className="mt-2 text-[11px] leading-4 text-white/50">Media Design<br />Social Content</p>
                 </div>
               </div>
             </div>
           </div>
-        </header>
 
-        {/* HOME Section */}
-        <div id="home">
-          {/* DESKTOP LAYOUT (lg and above) */}
-          <div className="relative mx-auto hidden max-w-7xl items-center gap-8 px-5 py-16 lg:grid lg:grid-cols-2 lg:px-10">
-            {/* LEFT */}
+          {/* MOBILE LAYOUT (below lg) */}
+          <div className="relative mx-auto block px-5 py-12 lg:hidden">
+            {/* Text Content */}
             <div className="max-w-[560px] animate-[fadeUp_1s_ease]">
-              <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">
+              <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-cyan-400 sm:text-[11px]">
                 DIGITAL MARKETING DESIGNER
               </p>
 
-              <h1 className="text-[64px] font-black leading-[1.05] tracking-[-0.04em] text-white">
+              <h1 className="text-[42px] font-black leading-[1.05] tracking-[-0.04em] text-white sm:text-[54px]">
                 I Design Digital
                 <br />
                 Experiences That
@@ -173,15 +225,15 @@ export default function Hero() {
                 </span>
               </h1>
 
-              <div className="mt-6 h-[4px] w-24 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500" />
+              <div className="mt-6 h-[4px] w-20 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 sm:w-24" />
 
-              <p className="mt-7 max-w-[460px] text-[15px] leading-8 text-white/55">
+              <p className="mt-7 max-w-[460px] text-sm leading-7 text-white/55 sm:text-[15px] sm:leading-8">
                 I create high-converting visual content and strategies
                 that help brands grow, engage, and stand out in the
                 digital world.
               </p>
 
-              <div className="mt-10 flex gap-4">
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <button 
                   onClick={() => scrollToSection("PORTFOLIO")}
                   className="rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white transition hover:scale-105 cursor-pointer"
@@ -198,123 +250,99 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* RIGHT - Double Circle Background */}
-            <div className="relative flex h-[650px] items-center justify-center">
-              {/* Outer Blurry Circle */}
-              <div className="absolute right-[0%] top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 blur-2xl" />
-              
-              {/* Inner Sharp Gradient Circle */}
-              <div className="absolute right-[5%] top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-600 via-cyan-500 to-violet-600 opacity-60" />
+            {/* Cards and Image Row */}
+            <div className="relative mt-12 flex flex-row items-center justify-between gap-3">
+              <div className="absolute right-[-25%] top-1/2 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-500/15 to-cyan-500/15 blur-2xl sm:h-[380px] sm:w-[380px]" />
+              <div className="absolute right-[-15%] top-1/2 h-[260px] w-[260px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-600 via-cyan-500 to-violet-600 opacity-60 sm:h-[300px] sm:w-[300px]" />
 
-              {/* Image */}
+              <div className="relative z-20 flex flex-col gap-3">
+                <div className="w-[115px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[135px] sm:p-3">
+                  <p className="text-[8px] font-semibold tracking-wide text-cyan-400 sm:text-[9px]">VIDEO EDITING</p>
+                  <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Cinematic<br />Reels</h3>
+                  <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Short Form Content<br />Motion Graphics</p>
+                </div>
+
+                <div className="w-[120px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[145px] sm:p-3">
+                  <p className="text-[8px] font-semibold tracking-wide text-violet-400 sm:text-[9px]">DIGITAL<br />MARKETING</p>
+                  <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Meta Ads<br />Strategy</h3>
+                  <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Content Marketing<br />Brand Growth</p>
+                </div>
+
+                <div className="w-[110px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[130px] sm:p-3">
+                  <p className="text-[8px] font-semibold tracking-wide text-green-400 sm:text-[9px]">GRAPHIC<br />DESIGN</p>
+                  <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Creative<br />Branding</h3>
+                  <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Media Design<br />Social Content</p>
+                </div>
+              </div>
+
               <div className="relative z-10">
                 <img
                   src={heroImage}
                   alt="Hero"
-                  className="relative z-10 h-[550px] object-contain [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
+                  className="relative z-10 h-[380px] w-auto object-contain sm:h-[480px] [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
                 />
               </div>
-
-              {/* Cards */}
-              <div className="absolute left-6 top-16 z-20 w-[150px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
-                <p className="text-[10px] font-semibold tracking-wide text-cyan-400">VIDEO EDITING</p>
-                <h3 className="mt-2 text-lg font-bold leading-tight text-white">Cinematic<br />Reels</h3>
-                <p className="mt-2 text-[11px] leading-4 text-white/50">Short Form Content<br />Motion Graphics</p>
-              </div>
-
-              <div className="absolute bottom-24 left-10 z-20 w-[160px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
-                <p className="text-[10px] font-semibold tracking-wide text-violet-400">DIGITAL<br />MARKETING</p>
-                <h3 className="mt-2 text-lg font-bold leading-tight text-white">Meta Ads<br />Strategy</h3>
-                <p className="mt-2 text-[11px] leading-4 text-white/50">Content Marketing<br />Brand Growth</p>
-              </div>
-
-              <div className="absolute right-10 top-[52%] z-20 w-[155px] rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm">
-                <p className="text-[10px] font-semibold tracking-wide text-green-400">GRAPHIC<br />DESIGN</p>
-                <h3 className="mt-2 text-lg font-bold leading-tight text-white">Creative<br />Branding</h3>
-                <p className="mt-2 text-[11px] leading-4 text-white/50">Media Design<br />Social Content</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* MOBILE LAYOUT (below lg) */}
-        <div className="relative mx-auto block px-5 py-12 lg:hidden">
-          {/* Text Content */}
-          <div className="max-w-[560px] animate-[fadeUp_1s_ease]">
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.22em] text-cyan-400 sm:text-[11px]">
-              DIGITAL MARKETING DESIGNER
-            </p>
-
-            <h1 className="text-[42px] font-black leading-[1.05] tracking-[-0.04em] text-white sm:text-[54px]">
-              I Design Digital
-              <br />
-              Experiences That
-              <br />
-              <span className="bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
-                Drive Results.
-              </span>
-            </h1>
-
-            <div className="mt-6 h-[4px] w-20 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 sm:w-24" />
-
-            <p className="mt-7 max-w-[460px] text-sm leading-7 text-white/55 sm:text-[15px] sm:leading-8">
-              I create high-converting visual content and strategies
-              that help brands grow, engage, and stand out in the
-              digital world.
-            </p>
-
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <button 
-                onClick={() => scrollToSection("PORTFOLIO")}
-                className="rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white transition hover:scale-105 cursor-pointer"
-              >
-                VIEW MY WORK
-              </button>
-
-              <button
-                onClick={() => setOpenModal(true)}
-                className="rounded-lg border border-white/6 bg-white/[0.02] px-7 py-4 text-[11px] font-bold tracking-[0.12em] text-white/75 backdrop-blur transition hover:border-cyan-400/20 hover:bg-cyan-400/5 hover:text-white cursor-pointer"
-              >
-                LET'S WORK TOGETHER
-              </button>
-            </div>
-          </div>
-
-          {/* Cards and Image Row */}
-          <div className="relative mt-12 flex flex-row items-center justify-between gap-3">
-            <div className="absolute right-[-25%] top-1/2 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-500/15 to-cyan-500/15 blur-2xl sm:h-[380px] sm:w-[380px]" />
-            <div className="absolute right-[-15%] top-1/2 h-[260px] w-[260px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-600 via-cyan-500 to-violet-600 opacity-60 sm:h-[300px] sm:w-[300px]" />
-
-            <div className="relative z-20 flex flex-col gap-3">
-              <div className="w-[115px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[135px] sm:p-3">
-                <p className="text-[8px] font-semibold tracking-wide text-cyan-400 sm:text-[9px]">VIDEO EDITING</p>
-                <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Cinematic<br />Reels</h3>
-                <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Short Form Content<br />Motion Graphics</p>
-              </div>
-
-              <div className="w-[120px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[145px] sm:p-3">
-                <p className="text-[8px] font-semibold tracking-wide text-violet-400 sm:text-[9px]">DIGITAL<br />MARKETING</p>
-                <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Meta Ads<br />Strategy</h3>
-                <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Content Marketing<br />Brand Growth</p>
-              </div>
-
-              <div className="w-[110px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[130px] sm:p-3">
-                <p className="text-[8px] font-semibold tracking-wide text-green-400 sm:text-[9px]">GRAPHIC<br />DESIGN</p>
-                <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Creative<br />Branding</h3>
-                <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Media Design<br />Social Content</p>
-              </div>
-            </div>
-
-            <div className="relative z-10">
-              <img
-                src={heroImage}
-                alt="Hero"
-                className="relative z-10 h-[380px] w-auto object-contain sm:h-[480px] [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
-              />
             </div>
           </div>
         </div>
       </section>
+
+      {/* Floating Navigation Button - Mobile Only (MOVED OUTSIDE HEADER) */}
+      <div className="fixed bottom-6 right-6 z-[100] md:hidden lg:hidden">
+        {/* Backdrop Blur Overlay - appears when menu is open */}
+        {floatingMenuOpen && (
+          <div 
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-all duration-300"
+            onClick={() => setFloatingMenuOpen(false)}
+          />
+        )}
+
+        {/* Floating Action Button */}
+        <button
+          onClick={() => setFloatingMenuOpen(!floatingMenuOpen)}
+          className="relative z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
+        >
+          <div className={`absolute transition-transform duration-300 ${floatingMenuOpen ? 'rotate-45' : 'rotate-0'}`}>
+            <span className="text-2xl font-bold text-white">+</span>
+          </div>
+        </button>
+
+        {/* Menu Items - Popup when clicked */}
+        <div className={`absolute bottom-20 right-0 z-50 transition-all duration-300 ${floatingMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+          <div className="flex flex-col gap-3">
+            {navItems.map((item, index) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item)}
+                className={`flex items-center justify-center rounded-full border px-5 py-3 text-[12px] font-bold tracking-[0.12em] shadow-lg backdrop-blur-md transition-all hover:scale-105 whitespace-nowrap cursor-pointer ${
+                  activeSection === item
+                    ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white border-transparent"
+                    : "bg-[#0B132B] border-white/10 text-white/90 hover:bg-white/10"
+                }`}
+                style={{
+                  animation: floatingMenuOpen ? `slideIn 0.2s ease ${index * 0.05}s both` : 'none'
+                }}
+              >
+                {item}
+              </button>
+            ))}
+            
+            {/* Contact Button */}
+            <button
+              onClick={() => {
+                setFloatingMenuOpen(false);
+                setOpenModal(true);
+              }}
+              className="flex items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 px-5 py-3 text-[12px] font-bold tracking-[0.12em] text-white shadow-lg transition-all hover:scale-105 whitespace-nowrap cursor-pointer"
+              style={{
+                animation: floatingMenuOpen ? `slideIn 0.2s ease ${navItems.length * 0.05}s both` : 'none'
+              }}
+            >
+              LET'S TALK →
+            </button>
+          </div>
+        </div>
+      </div>
 
       {/* MODAL */}
       {openModal && (
@@ -342,21 +370,20 @@ export default function Hero() {
                 <div><h3 className="font-bold text-white">Phone</h3><p className="text-[12px] text-white/50">09304999228</p></div>
               </a>
 
-             {/* Email */}
-                <a
-                  href="mailto:ryananthonyterrado21@gmail.com"
-                  className="flex items-center gap-3 rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3 transition hover:border-cyan-500/30 hover:bg-cyan-500/10"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
-                    ✉
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white">Email</h3>
-                    <p className="max-w-[180px] break-words text-[11px] leading-5 text-white/50">
-                      ryananthonyterrado21@gmail.com
-                    </p>
-                  </div>
-                </a>
+              <a
+                href="mailto:ryananthonyterrado21@gmail.com"
+                className="flex items-center gap-3 rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3 transition hover:border-cyan-500/30 hover:bg-cyan-500/10"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
+                  ✉
+                </div>
+                <div>
+                  <h3 className="font-bold text-white">Email</h3>
+                  <p className="max-w-[180px] break-words text-[11px] leading-5 text-white/50">
+                    ryananthonyterrado21@gmail.com
+                  </p>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -372,6 +399,19 @@ export default function Hero() {
             opacity: 1;
             transform: translateX(0);
           }
+        }
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-\\[fadeUp_1s_ease\\] {
+          animation: fadeUp 1s ease;
         }
       `}</style>
     </>

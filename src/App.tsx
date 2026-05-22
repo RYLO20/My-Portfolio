@@ -8,7 +8,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="bg-[#0B132B]">
+    <div className="bg-white dark:bg-[#0B132B] transition-colors duration-300">
       <Hero />
       <About />
       <Services />
