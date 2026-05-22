@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import heroImage from "../assets/hero.png";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Hero() {
   const [openModal, setOpenModal] = useState(false);
@@ -255,23 +256,27 @@ export default function Hero() {
               <div className="absolute right-[-25%] top-1/2 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-500/15 to-cyan-500/15 blur-2xl sm:h-[380px] sm:w-[380px]" />
               <div className="absolute right-[-15%] top-1/2 h-[260px] w-[260px] -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-600 via-cyan-500 to-violet-600 opacity-60 sm:h-[300px] sm:w-[300px]" />
 
-              <div className="relative z-20 flex flex-col gap-3">
-                <div className="w-[115px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[135px] sm:p-3">
-                  <p className="text-[8px] font-semibold tracking-wide text-cyan-400 sm:text-[9px]">VIDEO EDITING</p>
-                  <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Cinematic<br />Reels</h3>
-                  <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Short Form Content<br />Motion Graphics</p>
+              {/* INCREASED CARDS SIZES */}
+              <div className="relative z-20 flex flex-col gap-5">
+                {/* UPGRADED CARD 1 */}
+                <div className="w-[160px] rounded-xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm sm:w-[180px] sm:p-5">
+                  <p className="text-[10px] font-semibold tracking-wide text-cyan-400 sm:text-[11px]">VIDEO EDITING</p>
+                  <h3 className="mt-2 text-base font-bold leading-tight text-white sm:mt-2.5 sm:text-lg">Cinematic<br />Reels</h3>
+                  <p className="mt-2 text-[11px] leading-4 text-white/50 sm:mt-2.5 sm:text-xs sm:leading-5">Short Form Content<br />Motion Graphics</p>
                 </div>
 
-                <div className="w-[120px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[145px] sm:p-3">
-                  <p className="text-[8px] font-semibold tracking-wide text-violet-400 sm:text-[9px]">DIGITAL<br />MARKETING</p>
-                  <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Meta Ads<br />Strategy</h3>
-                  <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Content Marketing<br />Brand Growth</p>
+                {/* UPGRADED CARD 2 */}
+                <div className="w-[170px] rounded-xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm sm:w-[190px] sm:p-5">
+                  <p className="text-[10px] font-semibold tracking-wide text-violet-400 sm:text-[11px]">DIGITAL<br />MARKETING</p>
+                  <h3 className="mt-2 text-base font-bold leading-tight text-white sm:mt-2.5 sm:text-lg">Meta Ads<br />Strategy</h3>
+                  <p className="mt-2 text-[11px] leading-4 text-white/50 sm:mt-2.5 sm:text-xs sm:leading-5">Content Marketing<br />Brand Growth</p>
                 </div>
 
-                <div className="w-[110px] rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm sm:w-[130px] sm:p-3">
-                  <p className="text-[8px] font-semibold tracking-wide text-green-400 sm:text-[9px]">GRAPHIC<br />DESIGN</p>
-                  <h3 className="mt-1.5 text-xs font-bold leading-tight text-white sm:mt-2 sm:text-sm">Creative<br />Branding</h3>
-                  <p className="mt-1.5 text-[9px] leading-3.5 text-white/50 sm:mt-2 sm:text-[10px] sm:leading-4">Media Design<br />Social Content</p>
+                {/* UPGRADED CARD 3 */}
+                <div className="w-[155px] rounded-xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-sm sm:w-[175px] sm:p-5">
+                  <p className="text-[10px] font-semibold tracking-wide text-green-400 sm:text-[11px]">GRAPHIC<br />DESIGN</p>
+                  <h3 className="mt-2 text-base font-bold leading-tight text-white sm:mt-2.5 sm:text-lg">Creative<br />Branding</h3>
+                  <p className="mt-2 text-[11px] leading-4 text-white/50 sm:mt-2.5 sm:text-xs sm:leading-5">Media Design<br />Social Content</p>
                 </div>
               </div>
 
@@ -279,7 +284,7 @@ export default function Hero() {
                 <img
                   src={heroImage}
                   alt="Hero"
-                  className="relative z-10 h-[380px] w-auto object-contain sm:h-[480px] [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
+                   className="relative z-10 h-[480px] w-auto object-contain sm:h-[580px] [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
                 />
               </div>
             </div>
