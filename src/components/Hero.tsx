@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import heroImage from "../assets/hero.png";
 
-
 export default function Hero() {
   const [openModal, setOpenModal] = useState(false);
   const [floatingMenuOpen, setFloatingMenuOpen] = useState(false);
