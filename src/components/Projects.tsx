@@ -116,7 +116,7 @@ const videoProjects: any[] = []; // Empty array for now
     //awarenessLevel: "Consideration - Choosing between pharmacy options",
     //toolsUsed: ["CapCut", "Adobe Photoshop", "Meta Ads Manager"],
     //deliverables: "30-second promo video, 15-second cut for reels"
-  //},
+//},
 
 
 export default function Projects() {
@@ -185,11 +185,9 @@ export default function Projects() {
               MY PORTFOLIO
             </p>
             <h2 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
-              Social Media Marketing Work
+              Social Media Marketing Works
               <br />
-              <span className="bg-gradient-to-r from-cyan-400 to-violet-500 bg-clip-text text-transparent">
-                For JuanMeds Pharmacy
-              </span>
+              
             </h2>
             <p className="mt-5 max-w-2xl mx-auto text-sm leading-7 text-white/60 sm:text-base md:text-lg">
               Graphics and videos created for brand awareness campaigns on Facebook
