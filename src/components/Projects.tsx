@@ -34,21 +34,10 @@ import {
 // ============================================
 // IMPORT YOUR GRAPHICS IMAGES HERE
 // ============================================
-// Just uncomment and change the path to match your image filename
 import graphic1 from "../assets/graphics/firstpost.png";
 import graphic2 from "../assets/graphics/2ndpost.png";
 import graphic3 from "../assets/graphics/3rd post.png";
 import graphic4 from "../assets/graphics/4th post.png";
-// Add more graphics here as needed:
-// import graphic5 from "../assets/graphics/your-image.png";
-// import graphic6 from "../assets/graphics/another-image.jpg";
-
-// ============================================
-// IMPORT YOUR VIDEO THUMBNAILS HERE
-// ============================================
-// Add your video thumbnails here (place thumbnails in src/assets/videos/)
-// import videoThumb1 from "../assets/videos/video1-thumb.jpg";
-// import videoThumb2 from "../assets/videos/video2-thumb.jpg";
 
 // ============================================
 // GRAPHICS PROJECTS - Add your graphic projects here
@@ -58,8 +47,8 @@ const graphicsProjects = [
     id: 1,
     title: "Health Tips Carousel",
     category: "GRAPHICS",
-    image: graphic1,      // Your main image
-    thumbnail: graphic1,   // Thumbnail for cards (can be same as image)
+    image: graphic1,
+    thumbnail: graphic1,
     description: "Educational health tips graphics designed to provide value to the community while building brand trust.",
     targetMarket: "Local community members, families, and individuals seeking affordable healthcare options.",
     painPoints: "Lack of accessible health information, mistrust of generic pharmacy ads.",
@@ -80,85 +69,55 @@ const graphicsProjects = [
     toolsUsed: ["Adobe Photoshop", "Canva", "Adobe Illustrator"],
     deliverables: "15 promotional posts, 5 countdown graphics"
   },
-
-    
-  // ============================================
-  // 📌 TEMPLATE FOR ADDING NEW GRAPHIC PROJECTS:
-  // Just copy this template and fill in your details
-  // ============================================
-   {
-     id: 3,  // Change the ID number
-     title: "Juanmeds Daily posting",
-     category: "GRAPHICS",
-     image: graphic3,  // Your imported image
-     thumbnail: graphic3,  // Or use a different thumbnail
-     description: "Write a compelling description of your project here.",
-     targetMarket: "Families and Households Needing Affordable Medicines",
-     painPoints: "Medicines are too expensive for the family's budget.",
-     awarenessLevel: "Solution-aware",
-     toolsUsed: ["chatgpt", "Photoshop", "Obsidian"],
-     deliverables: "Increase pharmacy visits and position JuanMeds as the trusted affordable pharmacy for families"
-   },
-
-   {
-     id: 3,  // Change the ID number
-     title: "Your Project Title",
-     category: "GRAPHICS",
-     image: graphic4,  // Your imported image
-     thumbnail: graphic4,  // Or use a different thumbnail
-     description: "Write a compelling description of your project here.",
-     targetMarket: "Describe who this content is for.",
-     painPoints: "What problems does this solve for the audience?",
-     awarenessLevel: "Unaware / Problem-aware / Solution-aware / Product-aware / Consideration",
-     toolsUsed: ["Tool 1", "Tool 2", "Tool 3"],
-     deliverables: "List what you delivered"
-   },
-  
-  // ============================================
-  // 📌 TEMPLATE FOR ADDING NEW GRAPHIC PROJECTS:
-  // Just copy this template and fill in your details
-  // ============================================
-  // {
-  //   id: 3,  // Change the ID number
-  //   title: "Your Project Title",
-  //   category: "GRAPHICS",
-  //   image: graphic5,  // Your imported image
-  //   thumbnail: graphic5,  // Or use a different thumbnail
-  //   description: "Write a compelling description of your project here.",
-  //   targetMarket: "Describe who this content is for.",
-  //   painPoints: "What problems does this solve for the audience?",
-  //   awarenessLevel: "Unaware / Problem-aware / Solution-aware / Product-aware / Consideration",
-  //   toolsUsed: ["Tool 1", "Tool 2", "Tool 3"],
-  //   deliverables: "List what you delivered"
-  // },
+  {
+    id: 3,  // Fixed: Changed from 3 to 3 (only one id:3)
+    title: "Juanmeds Daily Posting",
+    category: "GRAPHICS",
+    image: graphic3,
+    thumbnail: graphic3,
+    description: "Daily social media posts maintaining brand presence and engaging with the community.",
+    targetMarket: "Families and Households Needing Affordable Medicines",
+    painPoints: "Medicines are too expensive for the family's budget.",
+    awarenessLevel: "Solution-aware",
+    toolsUsed: ["ChatGPT", "Photoshop", "Obsidian"],
+    deliverables: "Increase pharmacy visits and position JuanMeds as the trusted affordable pharmacy for families"
+  },
+  {
+    id: 4,  // Fixed: Changed from 3 to 3 (only one id:3)
+    title: "Juanmeds Daily Posting",
+    category: "GRAPHICS",
+    image: graphic4,
+    thumbnail: graphic4,
+    description: "Daily social media posts maintaining brand presence and engaging with the community.",
+    targetMarket: "Families and Households Needing Affordable Medicines",
+    painPoints: "Medicines are too expensive for the family's budget.",
+    awarenessLevel: "Solution-aware",
+    toolsUsed: ["ChatGPT", "Photoshop", "Obsidian"],
+    deliverables: "Increase pharmacy visits and position JuanMeds as the trusted affordable pharmacy for families"
+  }
+  // REMOVED the duplicate id:3 project with placeholder text
 ];
 
 // ============================================
 // VIDEOS PROJECTS - Add your video projects here
 // ============================================
-const videoProjects = [
-  // ============================================
-  // 📌 TEMPLATE FOR ADDING NEW VIDEO PROJECTS:
-  // 1. Place your video file in: public/videos/
-  // 2. Place thumbnail in: src/assets/videos/
-  // 3. Import thumbnail above
-  // 4. Use this template:
-  // ============================================
-  // {
-  //   id: 1,
-  //   title: "Your Video Title",
-  //   category: "VIDEOS",
-  //   image: videoThumb1,  // Your thumbnail import
-  //   thumbnail: videoThumb1,
-  //   videoUrl: "/videos/your-video-file.mp4",  // Path to video in public folder
-  //   description: "Describe what this video is about.",
-  //   targetMarket: "Who is this video for?",
-  //   painPoints: "What problems does it address?",
-  //   awarenessLevel: "Awareness / Consideration / Decision",
-  //   toolsUsed: ["CapCut", "Adobe Premiere Pro", "Meta Business Suite"],
-  //   deliverables: "What was delivered (e.g., 30-second video, 5 variations)"
-  // },
-];
+const videoProjects: any[] = []; // Empty array for now
+
+//{
+    //id: 1,
+    //title: "JuanMeds Promotional Video",
+    //category: "VIDEOS",
+    //image: promoVideoThumb,
+    //thumbnail: promoVideoThumb,
+    //videoUrl: "/videos/promo-video.mp4",  // Make sure this file exists in public/videos/
+    //description: "Promotional video highlighting JuanMeds' affordable medicines and friendly service.",
+    //targetMarket: "Budget-conscious families in need of affordable medicines.",
+    //painPoints: "High medication costs, long lines at major pharmacies.",
+    //awarenessLevel: "Consideration - Choosing between pharmacy options",
+    //toolsUsed: ["CapCut", "Adobe Photoshop", "Meta Ads Manager"],
+    //deliverables: "30-second promo video, 15-second cut for reels"
+  //},
+
 
 export default function Projects() {
   const [openModal, setOpenModal] = useState(false);
@@ -184,7 +143,6 @@ export default function Projects() {
     setOpenAllProjectsModal(false);
   };
 
-  // Helper to check if video URL is YouTube
   const isYouTubeUrl = (url: string) => {
     return url?.includes("youtube.com") || url?.includes("youtu.be");
   };
@@ -312,7 +270,7 @@ export default function Projects() {
             </div>
           )}
 
-          {/* Empty State - Show when no projects */}
+          {/* Empty State */}
           {currentProjects.length === 0 && (
             <div className="text-center py-20">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full border border-white/10 bg-white/5 mb-4">
@@ -325,14 +283,14 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* PROJECT DETAILS MODAL */}
+      {/* PROJECT DETAILS MODAL - FIXED VERSION */}
       {openModal && selectedProject && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
           onClick={closeModal}
         >
           <div 
-            className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl border border-white/10 bg-[#0B132B] p-6 shadow-2xl md:p-8 custom-scrollbar"
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/10 bg-[#0B132B] p-6 shadow-2xl md:p-8 custom-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 z-20 float-right -mt-2 -mr-2">
@@ -346,23 +304,33 @@ export default function Projects() {
 
             <div className="clear-both">
               <div className="relative mb-6 overflow-hidden rounded-xl bg-[#0B132B]">
-  {selectedProject.category === "VIDEOS" && selectedProject.videoUrl ? (
-    <video
-      src={selectedProject.videoUrl}
-      controls
-      className="w-full rounded-xl"
-      poster={selectedProject.image}
-    />
-  ) : (
-    <img
-      src={selectedProject.image}
-      alt={selectedProject.title}
-      className="w-full h-auto"
-    />
-  )}
-  {/* Remove or comment out the gradient overlay that might be covering the image */}
-  {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B] to-transparent pointer-events-none" /> */}
-                <div className="absolute inset-0 from-[#0B132B] to-transparent pointer-events-none" />
+                {selectedProject.category === "VIDEOS" && selectedProject.videoUrl ? (
+                  isYouTubeUrl(selectedProject.videoUrl) ? (
+                    <div className="relative pb-[56.25%] h-0">
+                      <iframe
+                        src={selectedProject.videoUrl}
+                        title={selectedProject.title}
+                        className="absolute top-0 left-0 w-full h-full rounded-xl"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : (
+                    <video
+                      src={selectedProject.videoUrl}
+                      controls
+                      className="w-full rounded-xl"
+                      poster={selectedProject.image}
+                    />
+                  )
+                ) : (
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="w-full h-auto rounded-xl"
+                  />
+                )}
                 
                 <div className="absolute bottom-4 left-4">
                   <div className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-[11px] font-bold tracking-[0.14em] text-cyan-300 backdrop-blur-sm">
