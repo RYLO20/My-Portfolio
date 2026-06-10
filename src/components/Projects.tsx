@@ -10,146 +10,154 @@ import {
   Grid3x3,
   Video,
   X,
-  ArrowRight
+  ArrowRight,
+  Plus
 } from "lucide-react";
 
-// Graphics Projects Data
+// ============================================
+// 📁 HOW TO ADD NEW PROJECTS:
+// ============================================
+// 
+// FOR GRAPHICS (Images):
+// 1. Add your image to: src/assets/graphics/
+// 2. Add import: import projectName from "../assets/graphics/your-image.png";
+// 3. Add to graphicsProjects array below
+//
+// FOR VIDEOS:
+// 1. Add video to: public/videos/
+// 2. Add thumbnail to: src/assets/videos/
+// 3. Add import: import videoThumb from "../assets/videos/your-thumb.jpg";
+// 4. Add to videoProjects array below
+//
+// ============================================
+
+// ============================================
+// IMPORT YOUR GRAPHICS IMAGES HERE
+// ============================================
+// Just uncomment and change the path to match your image filename
+import graphic1 from "../assets/graphics/firstpost.png";
+import graphic2 from "../assets/graphics/2ndpost.png";
+import graphic3 from "../assets/graphics/3rd post.png";
+import graphic4 from "../assets/graphics/4th post.png";
+// Add more graphics here as needed:
+// import graphic5 from "../assets/graphics/your-image.png";
+// import graphic6 from "../assets/graphics/another-image.jpg";
+
+// ============================================
+// IMPORT YOUR VIDEO THUMBNAILS HERE
+// ============================================
+// Add your video thumbnails here (place thumbnails in src/assets/videos/)
+// import videoThumb1 from "../assets/videos/video1-thumb.jpg";
+// import videoThumb2 from "../assets/videos/video2-thumb.jpg";
+
+// ============================================
+// GRAPHICS PROJECTS - Add your graphic projects here
+// ============================================
 const graphicsProjects = [
   {
     id: 1,
     title: "Health Tips Carousel",
     category: "GRAPHICS",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop",
+    image: graphic1,      // Your main image
+    thumbnail: graphic1,   // Thumbnail for cards (can be same as image)
     description: "Educational health tips graphics designed to provide value to the community while building brand trust.",
-    targetMarket: "Local community members, families, and individuals seeking affordable healthcare options in the area.",
-    painPoints: "Lack of accessible health information, mistrust of generic pharmacy ads, confusion about common health issues.",
-    awarenessLevel: "Problem-aware - Audience knows they need health information but doesn't know where to find reliable, easy-to-understand content.",
+    targetMarket: "Local community members, families, and individuals seeking affordable healthcare options.",
+    painPoints: "Lack of accessible health information, mistrust of generic pharmacy ads.",
+    awarenessLevel: "Problem-aware - Audience needs health information but doesn't know where to find reliable content.",
     toolsUsed: ["Canva", "Adobe Photoshop", "Meta Business Suite"],
-    deliverables: "5 carousel posts, 10 static graphics, branded templates"
+    deliverables: "5 carousel posts, 10 static graphics"
   },
   {
     id: 2,
     title: "Promotional Sale Graphics",
     category: "GRAPHICS",
-    image: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?q=80&w=600&auto=format&fit=crop",
-    description: "Eye-catching promotional graphics for sales, events, and special offers at JuanMeds Pharmacy.",
-    targetMarket: "Budget-conscious consumers, regular customers, and new potential customers looking for deals.",
-    painPoints: "High medication costs, unaware of ongoing promotions, need for timely sale notifications.",
-    awarenessLevel: "Solution-aware - Audience knows they want savings but needs to be informed about specific offers.",
+    image: graphic2,
+    thumbnail: graphic2,
+    description: "Eye-catching promotional graphics for sales and special offers at JuanMeds Pharmacy.",
+    targetMarket: "Budget-conscious consumers looking for deals and discounts.",
+    painPoints: "High medication costs, unaware of ongoing promotions.",
+    awarenessLevel: "Solution-aware - Audience knows they want savings but needs to be informed.",
     toolsUsed: ["Adobe Photoshop", "Canva", "Adobe Illustrator"],
-    deliverables: "15 promotional posts, 5 countdown graphics, 3 event announcements"
+    deliverables: "15 promotional posts, 5 countdown graphics"
   },
-  {
-    id: 3,
-    title: "Brand Awareness Graphics",
-    category: "GRAPHICS",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=600&auto=format&fit=crop",
-    description: "Brand-focused graphics highlighting JuanMeds as a trusted neighborhood pharmacy.",
-    targetMarket: "Local residents who haven't tried JuanMeds yet, community members seeking trusted healthcare partners.",
-    painPoints: "Lack of brand recognition, trust issues with new pharmacies, preference for established chains.",
-    awarenessLevel: "Unaware - Audience doesn't know JuanMeds exists or what makes them different.",
-    toolsUsed: ["Canva", "Adobe Photoshop", "Meta Business Suite"],
-    deliverables: "8 brand story posts, 5 testimonial graphics, 3 community spotlight designs"
-  },
-  {
-    id: 4,
-    title: "Seasonal Campaign Graphics",
-    category: "GRAPHICS",
-    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=600&auto=format&fit=crop",
-    description: "Seasonal graphics for holidays and special occasions relevant to the community.",
-    targetMarket: "Families celebrating holidays, people needing seasonal health reminders.",
-    painPoints: "Forgetting health needs during busy seasons, lack of festive yet professional content.",
-    awarenessLevel: "Solution-aware - Knows they need seasonal health content but needs engaging visuals.",
-    toolsUsed: ["Adobe Photoshop", "Canva", "Adobe Illustrator"],
-    deliverables: "12 seasonal posts, 4 holiday greetings, 3 health awareness day graphics"
-  },
-  {
-    id: 5,
-    title: "Product Highlight Graphics",
-    category: "GRAPHICS",
-    image: "https://images.unsplash.com/photo-1585435557343-3b092031a2ec?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1585435557343-3b092031a2ec?q=80&w=600&auto=format&fit=crop",
-    description: "Product-focused graphics showcasing available medications and health products.",
-    targetMarket: "Customers looking for specific medications, people with ongoing health conditions.",
-    painPoints: "Uncertainty about product availability, need for clear product information.",
-    awarenessLevel: "Product-aware - Knows what they need but needs confirmation of availability.",
-    toolsUsed: ["Canva", "Adobe Photoshop", "Adobe Lightroom"],
-    deliverables: "20 product highlight posts, 10 informational graphics, 5 comparison charts"
-  }
+
+    
+  // ============================================
+  // 📌 TEMPLATE FOR ADDING NEW GRAPHIC PROJECTS:
+  // Just copy this template and fill in your details
+  // ============================================
+   {
+     id: 3,  // Change the ID number
+     title: "Juanmeds Daily posting",
+     category: "GRAPHICS",
+     image: graphic3,  // Your imported image
+     thumbnail: graphic3,  // Or use a different thumbnail
+     description: "Write a compelling description of your project here.",
+     targetMarket: "Families and Households Needing Affordable Medicines",
+     painPoints: "Medicines are too expensive for the family's budget.",
+     awarenessLevel: "Solution-aware",
+     toolsUsed: ["chatgpt", "Photoshop", "Obsidian"],
+     deliverables: "Increase pharmacy visits and position JuanMeds as the trusted affordable pharmacy for families"
+   },
+
+   {
+     id: 3,  // Change the ID number
+     title: "Your Project Title",
+     category: "GRAPHICS",
+     image: graphic4,  // Your imported image
+     thumbnail: graphic4,  // Or use a different thumbnail
+     description: "Write a compelling description of your project here.",
+     targetMarket: "Describe who this content is for.",
+     painPoints: "What problems does this solve for the audience?",
+     awarenessLevel: "Unaware / Problem-aware / Solution-aware / Product-aware / Consideration",
+     toolsUsed: ["Tool 1", "Tool 2", "Tool 3"],
+     deliverables: "List what you delivered"
+   },
+  
+  // ============================================
+  // 📌 TEMPLATE FOR ADDING NEW GRAPHIC PROJECTS:
+  // Just copy this template and fill in your details
+  // ============================================
+  // {
+  //   id: 3,  // Change the ID number
+  //   title: "Your Project Title",
+  //   category: "GRAPHICS",
+  //   image: graphic5,  // Your imported image
+  //   thumbnail: graphic5,  // Or use a different thumbnail
+  //   description: "Write a compelling description of your project here.",
+  //   targetMarket: "Describe who this content is for.",
+  //   painPoints: "What problems does this solve for the audience?",
+  //   awarenessLevel: "Unaware / Problem-aware / Solution-aware / Product-aware / Consideration",
+  //   toolsUsed: ["Tool 1", "Tool 2", "Tool 3"],
+  //   deliverables: "List what you delivered"
+  // },
 ];
 
-// Videos Projects Data
+// ============================================
+// VIDEOS PROJECTS - Add your video projects here
+// ============================================
 const videoProjects = [
-  {
-    id: 1,
-    title: "Community Engagement Video",
-    category: "VIDEOS",
-    image: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=600&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    description: "Short-form video content showcasing JuanMeds' role in the local community and commitment to accessible healthcare.",
-    targetMarket: "Local community members, families, and individuals seeking relatable healthcare content.",
-    painPoints: "Lack of personal connection with pharmacy brands, need for authentic community representation.",
-    awarenessLevel: "Awareness - Needs to see real people and real stories to build trust.",
-    toolsUsed: ["CapCut", "Adobe Premiere Rush", "Meta Business Suite"],
-    deliverables: "30-second brand story video, behind-the-scenes clips, customer testimonial"
-  },
-  {
-    id: 2,
-    title: "Health Tips Reels",
-    category: "VIDEOS",
-    image: "https://images.unsplash.com/photo-1576671081837-49000212a370?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1576671081837-49000212a370?q=80&w=600&auto=format&fit=crop",
-    description: "Quick, engaging health tips delivered through Facebook Reels format.",
-    targetMarket: "Young adults and social media users who prefer video content over text.",
-    painPoints: "Short attention span, need for quick, digestible health information.",
-    awarenessLevel: "Problem-aware - Knows they need health information but wants it in entertaining format.",
-    toolsUsed: ["CapCut", "Canva Video Editor", "Facebook Reels"],
-    deliverables: "15 short Reels (15-30 seconds), animated text overlays, trending audio integration"
-  },
-  {
-    id: 3,
-    title: "Promotional Video Ads",
-    category: "VIDEOS",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=600&auto=format&fit=crop",
-    description: "High-converting video ads for Facebook promotion campaigns.",
-    targetMarket: "Potential customers who haven't visited JuanMeds yet.",
-    painPoints: "Need convincing to try a new pharmacy, require visual proof of value.",
-    awarenessLevel: "Consideration - Knows about pharmacy options but needs push to choose JuanMeds.",
-    toolsUsed: ["CapCut", "Adobe Premiere Pro", "Meta Ads Manager"],
-    deliverables: "3 promotional videos (30-45 seconds), 5 ad variations, A/B tested versions"
-  },
-  {
-    id: 4,
-    title: "Educational Video Series",
-    category: "VIDEOS",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop",
-    description: "Educational video series explaining common health topics and medication use.",
-    targetMarket: "Patients needing medication guidance, first-time medicine users.",
-    painPoints: "Confusion about proper medication use, need for clear instructions.",
-    awarenessLevel: "Solution-aware - Has the problem but needs guidance on solution.",
-    toolsUsed: ["CapCut", "Adobe After Effects", "Canva"],
-    deliverables: "5 educational videos (60 seconds each), motion graphics, subtitle integration"
-  },
-  {
-    id: 5,
-    title: "Customer Testimonial Videos",
-    category: "VIDEOS",
-    image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1200&auto=format&fit=crop",
-    thumbnail: "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=600&auto=format&fit=crop",
-    description: "Authentic customer testimonial videos building social proof and trust.",
-    targetMarket: "Skeptical customers who trust peer recommendations over ads.",
-    painPoints: "Distrust of advertising, need for social proof before trying new pharmacy.",
-    awarenessLevel: "Consideration - Needs validation from real customers to make decision.",
-    toolsUsed: ["CapCut", "Adobe Premiere Rush", "Mobile Video Tools"],
-    deliverables: "4 testimonial videos, before/after transitions, customer story highlights"
-  }
+  // ============================================
+  // 📌 TEMPLATE FOR ADDING NEW VIDEO PROJECTS:
+  // 1. Place your video file in: public/videos/
+  // 2. Place thumbnail in: src/assets/videos/
+  // 3. Import thumbnail above
+  // 4. Use this template:
+  // ============================================
+  // {
+  //   id: 1,
+  //   title: "Your Video Title",
+  //   category: "VIDEOS",
+  //   image: videoThumb1,  // Your thumbnail import
+  //   thumbnail: videoThumb1,
+  //   videoUrl: "/videos/your-video-file.mp4",  // Path to video in public folder
+  //   description: "Describe what this video is about.",
+  //   targetMarket: "Who is this video for?",
+  //   painPoints: "What problems does it address?",
+  //   awarenessLevel: "Awareness / Consideration / Decision",
+  //   toolsUsed: ["CapCut", "Adobe Premiere Pro", "Meta Business Suite"],
+  //   deliverables: "What was delivered (e.g., 30-second video, 5 variations)"
+  // },
 ];
 
 export default function Projects() {
@@ -174,6 +182,11 @@ export default function Projects() {
 
   const closeAllProjectsModal = () => {
     setOpenAllProjectsModal(false);
+  };
+
+  // Helper to check if video URL is YouTube
+  const isYouTubeUrl = (url: string) => {
+    return url?.includes("youtube.com") || url?.includes("youtu.be");
   };
 
   return (
@@ -250,6 +263,7 @@ export default function Projects() {
             </button>
           </div>
 
+          {/* Featured Projects Grid */}
           <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {featuredProjects.map((project) => (
               <div
@@ -285,6 +299,7 @@ export default function Projects() {
             ))}
           </div>
 
+          {/* View All Button */}
           {remainingProjects.length > 0 && (
             <div className="flex justify-center mt-12">
               <button
@@ -294,6 +309,17 @@ export default function Projects() {
                 <span>VIEW ALL {activeCategory}</span>
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </button>
+            </div>
+          )}
+
+          {/* Empty State - Show when no projects */}
+          {currentProjects.length === 0 && (
+            <div className="text-center py-20">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full border border-white/10 bg-white/5 mb-4">
+                <Plus className="w-10 h-10 text-white/30" />
+              </div>
+              <p className="text-white/40 text-lg">No projects added yet</p>
+              <p className="text-white/30 text-sm mt-2">Add your first project using the template above</p>
             </div>
           )}
         </div>
@@ -319,26 +345,24 @@ export default function Projects() {
             </div>
 
             <div className="clear-both">
-              <div className="relative mb-6 overflow-hidden rounded-xl">
-                {selectedProject.category === "VIDEOS" && selectedProject.videoUrl ? (
-                  <div className="relative pb-[56.25%] h-0">
-                    <iframe
-                      src={selectedProject.videoUrl}
-                      title={selectedProject.title}
-                      className="absolute top-0 left-0 w-full h-full rounded-xl"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                ) : (
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="h-[240px] w-full object-cover md:h-[320px]"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B] to-transparent" />
+              <div className="relative mb-6 overflow-hidden rounded-xl bg-[#0B132B]">
+  {selectedProject.category === "VIDEOS" && selectedProject.videoUrl ? (
+    <video
+      src={selectedProject.videoUrl}
+      controls
+      className="w-full rounded-xl"
+      poster={selectedProject.image}
+    />
+  ) : (
+    <img
+      src={selectedProject.image}
+      alt={selectedProject.title}
+      className="w-full h-auto"
+    />
+  )}
+  {/* Remove or comment out the gradient overlay that might be covering the image */}
+  {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B] to-transparent pointer-events-none" /> */}
+                <div className="absolute inset-0 from-[#0B132B] to-transparent pointer-events-none" />
                 
                 <div className="absolute bottom-4 left-4">
                   <div className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-[11px] font-bold tracking-[0.14em] text-cyan-300 backdrop-blur-sm">
@@ -445,7 +469,7 @@ export default function Projects() {
                   All {activeCategory} Projects
                 </h2>
                 <p className="mt-3 text-white/60">
-                  {remainingProjects.length + 3} total {activeCategory.toLowerCase()} created for JuanMeds Pharmacy
+                  {currentProjects.length} total {activeCategory.toLowerCase()} created for JuanMeds Pharmacy
                 </p>
               </div>
 
